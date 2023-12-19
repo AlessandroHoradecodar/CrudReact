@@ -13,7 +13,7 @@ function App() {
     api.get("http://localhost:5555/users").then((response) => {
       setUser(response.data);
     });
-  });
+  }, []);
 
   //POST
   const addUser = () => {
@@ -65,21 +65,31 @@ function App() {
       <h1>Users</h1>
       <ul>
         {user.map((user: any) => (
-          <div key={user.id}>
-            <span>
+          <div key={user.id} className="sec1">
+            <span className="dataContainer">
               {user.name} - {user.age}
             </span>
-            <input type="text" id={`updatedName${user.id}`} />
-            <input type="number" id={`updateAge${user.id}`} />
+            <input
+              type="text"
+              id={`updatedName${user.id}`}
+              className="nameIpt"
+            />
+            <input
+              type="number"
+              id={`updateAge${user.id}`}
+              className="ageIpt"
+            />
             <button onClick={() => updateUser(user.id)}>Update</button>
             <button onClick={() => deleteUser(user.id)}>Delete</button>
           </div>
         ))}
       </ul>
-      <div>
+      <div className="createUserContainer">
+        <label htmlFor="">Name</label>
+        <input type="text" id="userName"  className="nameIpt" required />
+        <label htmlFor="">Age</label>
+        <input type="number" id="userAge" className="ageIpt" required />
         <button onClick={addUser}>Add User</button>
-        <input type="text" id="userName" required />
-        <input type="number" id="userAge" required />
       </div>
     </>
   );
